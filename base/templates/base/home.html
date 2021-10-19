@@ -1,8 +1,25 @@
 {% extends 'base/base.html' %}
 {% block content %}
+<style>
+  .home-container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+</style>
 <h1>Home</h1>
-<div >
+<div class="home-container">
+  <div>
+    <h3>Browse Topic</h3>
+    <hr>
+    {% for topic in topics %}
+    <div>
+      <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+    </div>
+    {% endfor %}
+  </div>
+  <div >
     <a href="{% url 'create_room' %}">Create Room</a>
+    <h3>{{rooms_count}} rooms available</h3>
     <table style="border: 1px solid;">
         <tr style="border: 1px solid;">
           <th style="border: 1px solid;">id</th>
@@ -24,5 +41,8 @@
         {% endfor %}
         
       </table>
+  </div>
+
 </div>
+
 {% endblock %}
